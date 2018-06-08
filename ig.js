@@ -95,15 +95,6 @@ const Target = async function(username){
 
 }
 
-async function ngefollow(session,accountId){
-	try {
-		await Client.Relationship.create(session, accountId);
-		return true
-	} catch (e) {
-		return false
-	}
-}
-
 async function ngeComment(session, id, text){
 	try {
 		await Client.Comment.create(session, id, text);
@@ -135,7 +126,6 @@ const CommentAndLike = async function(session, accountId, text){
 
 	if (result.length > 0) {
 		const task = [
-			ngefollow(session, accountId),
 			ngeComment(session, result[0].params.id, text),
 			ngeLike(session, result[0].params.id)
 		]
